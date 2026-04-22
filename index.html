@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mugo Law | Premier Legal Counsel — Nairobi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+  /* ─── RESET & ROOT ─────────────────────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy:    #0d1b2e;
+    --navy2:   #152336;
+    --gold:    #b8963e;
+    --gold-lt: #d4b06a;
+    --gold-dk: #8c6f28;
+    --cream:   #faf8f4;
+    --offwhite:#f4f1ec;
+    --grey:    #8a8f99;
+    --lgrey:   #e8e4dc;
+    --text:    #1a1a2e;
+    --white:   #ffffff;
+    --ff-head: 'Cormorant Garamond', Georgia, serif;
+    --ff-body: 'DM Sans', sans-serif;
+    --ease:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: var(--ff-body);
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  input, textarea, select { font-family: var(--ff-body); }
+
+  /* ─── UTILITIES ────────────────────────────────────────────────── */
+  .gold { color: var(--gold); }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+  .section-label {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-label::before {
+    content: '';
+    width: 36px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: var(--white);
+    font-family: var(--ff-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 18px 36px;
+    transition: all 0.35s var(--ease);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s var(--ease);
+    mix-blend-mode: overlay;
+    opacity: 0.15;
+  }
+  .btn-primary:hover { background: var(--gold-dk); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(184,150,62,0.35); }
+  .btn-primary:hover::after { transform: scaleX(1); transform-origin: left; }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--white);
+    font-family: var(--ff-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 17px 36px;
+    border: 1px solid rgba(255,255,255,0.45);
+    transition: all 0.35s var(--ease);
+    cursor: pointer;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); transform: translateY(-2px); }
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  }
+  .reveal-left.visible { opacity: 1; transform: none; }
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  }
+  .reveal-right.visible { opacity: 1; transform: none; }
+
+  /* ─── NAV ──────────────────────────────────────────────────────── */
+  #navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 28px 0;
+    transition: all 0.45s var(--ease);
+  }
+  #navbar.scrolled {
+    background: rgba(13,27,46,0.97);
+    backdrop-filter: blur(12px);
+    padding: 16px 0;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.25);
+  }
+  #navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .nav-logo .firm-name {
+    font-family: var(--ff-head);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+  .nav-logo .firm-sub {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 3px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .nav-links a {
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s var(--ease);
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.16em !important;
+    color: var(--white) !important;
+    background: var(--gold);
+    padding: 12px 24px;
+    transition: background 0.3s, transform 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--gold-dk) !important; transform: none !important; }
+  .nav-cta::after { display: none !important; }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .hamburger span {
+    width: 28px; height: 2px;
+    background: var(--white);
+    transition: all 0.3s;
+    display: block;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--navy);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--ff-head);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.03em;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-close {
+    position: absolute;
+    top: 28px; right: 28px;
+    font-size: 28px;
+    color: var(--white);
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+  }
+
+  /* ─── HERO ─────────────────────────────────────────────────────── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--navy);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1800&q=80&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center 30%;
+    transform: scale(1.05);
+    animation: heroZoom 12s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1.12); }
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(13,27,46,0.92) 0%,
+      rgba(13,27,46,0.72) 55%,
+      rgba(13,27,46,0.45) 100%
+    );
+  }
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 140px 0 100px;
+    max-width: 820px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(184,150,62,0.5);
+    padding: 8px 18px;
+    margin-bottom: 36px;
+    animation: fadeUp 0.9s var(--ease) 0.2s both;
+  }
+  .hero-badge span {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+  }
+  .hero-badge i { color: var(--gold); font-size: 9px; }
+  .hero-h1 {
+    font-family: var(--ff-head);
+    font-size: clamp(52px, 7.5vw, 96px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+    animation: fadeUp 1s var(--ease) 0.4s both;
+  }
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--gold-lt);
+  }
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 52px;
+    animation: fadeUp 1s var(--ease) 0.6s both;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    animation: fadeUp 1s var(--ease) 0.8s both;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.45);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    animation: fadeUp 1s var(--ease) 1.2s both;
+    cursor: pointer;
+  }
+  .scroll-line {
+    width: 1px; height: 56px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ─── TRUST STRIP ───────────────────────────────────────────────── */
+  #trust {
+    background: var(--navy);
+    border-top: 1px solid rgba(184,150,62,0.2);
+    padding: 0;
+  }
+  .trust-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-left: 1px solid rgba(184,150,62,0.15);
+  }
+  .trust-item {
+    padding: 44px 40px;
+    border-right: 1px solid rgba(184,150,62,0.15);
+    border-bottom: none;
+    text-align: center;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .trust-item:hover { background: rgba(184,150,62,0.06); }
+  .trust-item .num {
+    font-family: var(--ff-head);
+    font-size: 54px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .trust-item .num sup { font-size: 24px; vertical-align: super; }
+  .trust-item .lbl {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ─── ABOUT ─────────────────────────────────────────────────────── */
+  #about {
+    padding: 130px 0;
+    background: var(--cream);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 90px;
+    align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-wrap img {
+    width: 100%;
+    height: 620px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+  .about-img-badge {
+    position: absolute;
+    bottom: -28px; right: -28px;
+    background: var(--gold);
+    padding: 32px 36px;
+    text-align: center;
+  }
+  .about-img-badge .b-num {
+    font-family: var(--ff-head);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+  .about-img-badge .b-lbl {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-top: 6px;
+  }
+  .about-text h2 {
+    font-family: var(--ff-head);
+    font-size: clamp(38px, 4.5vw, 62px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.08;
+    margin-bottom: 28px;
+  }
+  .about-text h2 em { font-style: italic; color: var(--gold); }
+  .about-text p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #4a4f5c;
+    line-height: 1.85;
+    margin-bottom: 22px;
+  }
+  .about-divider {
+    width: 56px; height: 2px;
+    background: var(--gold);
+    margin: 32px 0;
+  }
+  .about-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 36px;
+  }
+  .pillar-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px;
+    background: var(--white);
+    border-left: 3px solid var(--gold);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .pillar-item:hover { transform: translateX(4px); box-shadow: 4px 0 24px rgba(184,150,62,0.12); }
+  .pillar-item i { color: var(--gold); font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+  .pillar-item p { font-size: 13px; font-weight: 500; color: var(--navy); line-height: 1.5; }
+
+  /* ─── PRACTICE AREAS ────────────────────────────────────────────── */
+  #practice {
+    padding: 130px 0;
+    background: var(--white);
+  }
+  .practice-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 70px;
+  }
+  .practice-header h2 {
+    font-family: var(--ff-head);
+    font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.05;
+  }
+  .practice-header h2 em { font-style: italic; color: var(--gold); }
+  .practice-header p {
+    font-size: 15.5px;
+    color: #5a5f6c;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--lgrey);
+  }
+  .practice-card {
+    background: var(--white);
+    padding: 48px 40px;
+    transition: all 0.4s var(--ease);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .practice-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+  }
+  .practice-card:hover { background: var(--navy); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(13,27,46,0.18); }
+  .practice-card:hover::before { transform: scaleX(1); }
+  .practice-card:hover .pc-icon { color: var(--gold); }
+  .practice-card:hover h3 { color: var(--white); }
+  .practice-card:hover p { color: rgba(255,255,255,0.62); }
+  .practice-card:hover .pc-arrow { color: var(--gold); opacity: 1; }
+  .pc-icon { font-size: 28px; color: var(--gold); margin-bottom: 26px; transition: color 0.3s; }
+  .practice-card h3 {
+    font-family: var(--ff-head);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 14px;
+    transition: color 0.3s;
+    line-height: 1.2;
+  }
+  .practice-card p { font-size: 14px; color: #6a6f7c; line-height: 1.75; font-weight: 300; transition: color 0.3s; }
+  .pc-arrow { font-size: 12px; color: var(--gold); margin-top: 24px; display: block; opacity: 0.5; transition: opacity 0.3s; letter-spacing: 0.1em; font-weight: 500; }
+
+  /* ─── WHY CHOOSE US ─────────────────────────────────────────────── */
+  #why {
+    padding: 130px 0;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  #why::before {
+    content: 'ML';
+    position: absolute;
+    font-family: var(--ff-head);
+    font-size: 480px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.02);
+    right: -60px;
+    bottom: -120px;
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.04em;
+  }
+  .why-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .why-header h2 {
+    font-family: var(--ff-head);
+    font-size: clamp(38px, 4.5vw, 62px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.06;
+    margin-bottom: 20px;
+  }
+  .why-header h2 em { font-style: italic; color: var(--gold); }
+  .why-header p { font-size: 16px; color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto; line-height: 1.75; font-weight: 300; }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.05);
+  }
+  .why-card {
+    background: var(--navy2);
+    padding: 48px 36px;
+    text-align: center;
+    transition: background 0.35s;
+  }
+  .why-card:hover { background: rgba(184,150,62,0.1); }
+  .why-icon {
+    width: 72px; height: 72px;
+    border: 1px solid rgba(184,150,62,0.35);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    transition: all 0.35s;
+  }
+  .why-card:hover .why-icon { border-color: var(--gold); background: rgba(184,150,62,0.1); }
+  .why-icon i { font-size: 22px; color: var(--gold); }
+  .why-card h3 {
+    font-family: var(--ff-head);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .why-card p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.8; font-weight: 300; }
+
+  /* ─── INSIGHT SECTION ───────────────────────────────────────────── */
+  #insight {
+    padding: 130px 0;
+    background: var(--offwhite);
+    position: relative;
+  }
+  .insight-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .insight-text h2 {
+    font-family: var(--ff-head);
+    font-size: clamp(38px, 4vw, 60px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.07;
+    margin-bottom: 28px;
+  }
+  .insight-text h2 em { font-style: italic; color: var(--gold); }
+  .insight-text p { font-size: 15.5px; color: #555a66; line-height: 1.85; font-weight: 300; margin-bottom: 18px; }
+  .insight-text blockquote {
+    border-left: 3px solid var(--gold);
+    padding-left: 24px;
+    margin: 36px 0;
+    font-family: var(--ff-head);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.5;
+  }
+  .insight-img img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+  }
+  .insight-img-cap {
+    padding: 24px 28px;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .insight-img-cap i { color: var(--white); font-size: 16px; }
+  .insight-img-cap span { font-size: 13px; font-weight: 600; color: var(--white); letter-spacing: 0.06em; }
+
+  /* ─── TESTIMONIALS ──────────────────────────────────────────────── */
+  #testimonials {
+    padding: 130px 0;
+    background: var(--white);
+  }
+  .test-header {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+  .test-header h2 {
+    font-family: var(--ff-head);
+    font-size: clamp(38px, 4.5vw, 62px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.06;
+  }
+  .test-header h2 em { font-style: italic; color: var(--gold); }
+  .test-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .test-card {
+    background: var(--cream);
+    padding: 44px 40px;
+    position: relative;
+    border-top: 3px solid transparent;
+    transition: all 0.35s var(--ease);
+  }
+  .test-card:hover { border-top-color: var(--gold); transform: translateY(-6px); box-shadow: 0 20px 56px rgba(13,27,46,0.1); }
+  .test-quote-icon {
+    font-family: var(--ff-head);
+    font-size: 80px;
+    color: var(--gold);
+    opacity: 0.25;
+    line-height: 1;
+    margin-bottom: 8px;
+    display: block;
+    leading-trim: both;
+    text-edge: cap alphabetic;
+  }
+  .test-card p {
+    font-family: var(--ff-head);
+    font-size: 19px;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+  .test-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid var(--lgrey);
+    padding-top: 24px;
+  }
+  .test-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--lgrey);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .test-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .test-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+  .test-role { font-size: 12px; color: var(--grey); margin-top: 2px; }
+  .test-stars { color: var(--gold); font-size: 11px; margin-top: 4px; }
+
+  /* ─── CTA BLOCK ─────────────────────────────────────────────────── */
+  #cta {
+    padding: 130px 0;
+    background: var(--navy);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,150,62,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-inner { position: relative; z-index: 1; }
+  .cta-inner h2 {
+    font-family: var(--ff-head);
+    font-size: clamp(42px, 5.5vw, 78px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.04;
+    margin-bottom: 24px;
+  }
+  .cta-inner h2 em { font-style: italic; color: var(--gold-lt); }
+  .cta-inner p { font-size: 17px; color: rgba(255,255,255,0.6); margin-bottom: 52px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.75; font-weight: 300; }
+  .cta-divider {
+    width: 56px; height: 1px;
+    background: var(--gold);
+    margin: 0 auto 36px;
+    opacity: 0.6;
+  }
+
+  /* ─── CONTACT ───────────────────────────────────────────────────── */
+  #contact {
+    padding: 130px 0;
+    background: var(--cream);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-info h2 {
+    font-family: var(--ff-head);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.08;
+    margin-bottom: 24px;
+  }
+  .contact-info h2 em { font-style: italic; color: var(--gold); }
+  .contact-info p { font-size: 15px; color: #5a5f6c; line-height: 1.8; margin-bottom: 44px; font-weight: 300; }
+  .contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .cd-icon {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .cd-icon i { font-size: 15px; color: var(--gold); }
+  .cd-text .cd-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .cd-text .cd-val { font-size: 15px; color: var(--navy); font-weight: 400; }
+  .map-wrap { margin-top: 44px; overflow: hidden; }
+  .map-wrap iframe { width: 100%; height: 240px; border: none; filter: grayscale(20%) contrast(1.05); }
+  .contact-form { background: var(--white); padding: 52px 48px; box-shadow: 0 8px 48px rgba(13,27,46,0.07); }
+  .form-title {
+    font-family: var(--ff-head);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 36px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); margin-bottom: 10px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--offwhite);
+    border: 1px solid var(--lgrey);
+    border-radius: 0;
+    font-size: 14.5px;
+    color: var(--text);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    font-weight: 300;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,150,62,0.1);
+    background: var(--white);
+  }
+  .form-group textarea { resize: vertical; min-height: 130px; }
+  .form-submit { width: 100%; margin-top: 8px; padding: 20px; font-size: 12px; }
+  .form-success { display: none; text-align: center; padding: 20px; color: var(--gold); font-size: 14px; font-weight: 500; }
+
+  /* ─── FOOTER ─────────────────────────────────────────────────────── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(184,150,62,0.15);
+  }
+  .footer-top {
+    padding: 80px 0 60px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-brand .firm-name {
+    font-family: var(--ff-head);
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .footer-brand .firm-sub {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: block;
+    margin-top: 4px;
+  }
+  .footer-brand p { font-size: 13.5px; color: rgba(255,255,255,0.45); line-height: 1.8; font-weight: 300; }
+  .footer-col h4 {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+  .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.5); transition: color 0.3s; font-weight: 300; }
+  .footer-col ul li a:hover { color: var(--white); }
+  .footer-col p { font-size: 13.5px; color: rgba(255,255,255,0.45); line-height: 1.8; font-weight: 300; margin-bottom: 10px; }
+  .footer-socials { display: flex; gap: 12px; margin-top: 20px; }
+  .footer-socials a {
+    width: 38px; height: 38px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+  .footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-bottom {
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.35); font-weight: 300; }
+  .footer-bottom a { color: var(--gold-lt); transition: color 0.3s; }
+  .footer-bottom a:hover { color: var(--white); }
+
+  /* ─── RESPONSIVE ─────────────────────────────────────────────────── */
+  @media (max-width: 1100px) {
+    .container { padding: 0 32px; }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 44px; }
+  }
+  @media (max-width: 900px) {
+    .about-grid, .insight-inner, .contact-grid { grid-template-columns: 1fr; gap: 52px; }
+    .about-img-wrap img { height: 440px; }
+    .about-img-badge { bottom: -20px; right: -16px; }
+    .practice-header { grid-template-columns: 1fr; gap: 24px; }
+    .practice-grid { grid-template-columns: repeat(2, 1fr); }
+    .test-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+    .trust-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .container { padding: 0 22px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    #hero { min-height: 100svh; }
+    .hero-content { padding: 130px 0 90px; }
+    .hero-ctas { flex-direction: column; }
+    .hero-ctas .btn-primary, .hero-ctas .btn-outline { width: 100%; justify-content: center; }
+    .practice-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .about-pillars { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form { padding: 36px 28px; }
+    .footer-top { grid-template-columns: 1fr; gap: 40px; padding: 56px 0 40px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .trust-inner { grid-template-columns: 1fr 1fr; }
+    .insight-img img { height: 360px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ───────── NAVBAR ───────── -->
+<nav id="navbar">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <span class="firm-name">Mugo Law</span>
+      <span class="firm-sub">Advocates &amp; Legal Consultants</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#practice">Practice Areas</a></li>
+      <li><a href="#why">Our Approach</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Consult Us</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Menu" role="button">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">&times;</button>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#practice" class="mobile-link">Practice Areas</a>
+  <a href="#why" class="mobile-link">Our Approach</a>
+  <a href="#testimonials" class="mobile-link">Testimonials</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- ───────── HERO ───────── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grain"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-circle"></i>
+        <span>Premier Legal Counsel — Nairobi, Kenya</span>
+      </div>
+      <h1 class="hero-h1">
+        Precision Legal<br>
+        Strategy. <em>Proven</em><br>
+        Results.
+      </h1>
+      <p class="hero-sub">
+        Mugo Law delivers sophisticated, results-driven legal counsel for individuals and enterprises across Kenya and beyond. Where strategy meets the law.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">
+          <i class="fa-regular fa-calendar-check"></i>
+          Book Consultation
+        </a>
+        <a href="#practice" class="btn-outline">
+          <i class="fa-solid fa-arrow-right"></i>
+          View Practice Areas
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('trust').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ───────── TRUST STRIP ───────── -->
+<section id="trust">
+  <div class="trust-inner container" style="max-width:100%;padding:0 48px;margin:0 auto;">
+    <div class="trust-item reveal">
+      <div class="num">20<sup>+</sup></div>
+      <div class="lbl">Years of Practice</div>
+    </div>
+    <div class="trust-item reveal" style="transition-delay:0.12s">
+      <div class="num">1,200<sup>+</sup></div>
+      <div class="lbl">Cases Handled</div>
+    </div>
+    <div class="trust-item reveal" style="transition-delay:0.24s">
+      <div class="num">98<sup>%</sup></div>
+      <div class="lbl">Client Satisfaction</div>
+    </div>
+    <div class="trust-item reveal" style="transition-delay:0.36s">
+      <div class="num">6</div>
+      <div class="lbl">Practice Areas</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── ABOUT ───────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal-left">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80&auto=format&fit=crop" alt="Senior Partner, Mugo Law" loading="lazy" />
+        <div class="about-img-badge">
+          <div class="b-num">20</div>
+          <div class="b-lbl">Years<br>Excellence</div>
+        </div>
+      </div>
+      <div class="about-text reveal-right">
+        <div class="section-label">About the Firm</div>
+        <h2>Anchored in<br><em>Integrity.</em> Built<br>for Results.</h2>
+        <div class="about-divider"></div>
+        <p>Mugo Law is a premier full-service law firm headquartered in Nairobi, Kenya. We serve high-net-worth individuals, corporations, and institutions requiring sophisticated legal strategy delivered with unwavering discretion.</p>
+        <p>Founded on the principles of excellence and client-first advocacy, our team brings decades of combined experience across Kenya's most complex legal landscapes — from boardrooms to courtrooms.</p>
+        <div class="about-pillars">
+          <div class="pillar-item">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <p>Strategic Legal Thinking</p>
+          </div>
+          <div class="pillar-item">
+            <i class="fa-solid fa-handshake"></i>
+            <p>Client-Centered Approach</p>
+          </div>
+          <div class="pillar-item">
+            <i class="fa-solid fa-award"></i>
+            <p>Proven Track Record</p>
+          </div>
+          <div class="pillar-item">
+            <i class="fa-solid fa-lock"></i>
+            <p>Discretion &amp; Integrity</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── PRACTICE AREAS ───────── -->
+<section id="practice">
+  <div class="container">
+    <div class="practice-header">
+      <div class="reveal-left">
+        <div class="section-label">What We Do</div>
+        <h2>Practice<br><em>Areas</em></h2>
+      </div>
+      <p class="reveal-right">We offer a comprehensive range of legal services tailored to the unique needs of our clients — from individuals to multinationals operating in Kenya and across the region.</p>
+    </div>
+    <div class="practice-grid">
+      <div class="practice-card reveal">
+        <div class="pc-icon"><i class="fa-solid fa-building"></i></div>
+        <h3>Corporate Law</h3>
+        <p>Company formation, governance, mergers &amp; acquisitions, joint ventures, and regulatory compliance for businesses of every scale.</p>
+        <span class="pc-arrow"><i class="fa-solid fa-arrow-right"></i> &nbsp;Learn More</span>
+      </div>
+      <div class="practice-card reveal" style="transition-delay:.1s">
+        <div class="pc-icon"><i class="fa-solid fa-house"></i></div>
+        <h3>Real Estate Law</h3>
+        <p>Property transactions, title searches, conveyancing, lease agreements, and land disputes across Kenya's evolving property market.</p>
+        <span class="pc-arrow"><i class="fa-solid fa-arrow-right"></i> &nbsp;Learn More</span>
+      </div>
+      <div class="practice-card reveal" style="transition-delay:.2s">
+        <div class="pc-icon"><i class="fa-solid fa-users"></i></div>
+        <h3>Family Law</h3>
+        <p>Divorce, child custody, adoption, matrimonial property, and succession matters handled with sensitivity and strategic clarity.</p>
+        <span class="pc-arrow"><i class="fa-solid fa-arrow-right"></i> &nbsp;Learn More</span>
+      </div>
+      <div class="practice-card reveal" style="transition-delay:.3s">
+        <div class="pc-icon"><i class="fa-solid fa-gavel"></i></div>
+        <h3>Litigation</h3>
+        <p>Civil and commercial litigation, arbitration, and dispute resolution before all Kenyan courts and regulatory tribunals.</p>
+        <span class="pc-arrow"><i class="fa-solid fa-arrow-right"></i> &nbsp;Learn More</span>
+      </div>
+      <div class="practice-card reveal" style="transition-delay:.4s">
+        <div class="pc-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h3>Commercial Law</h3>
+        <p>Banking, finance, trade law, intellectual property, and strategic commercial advisory for local and international businesses.</p>
+        <span class="pc-arrow"><i class="fa-solid fa-arrow-right"></i> &nbsp;Learn More</span>
+      </div>
+      <div class="practice-card reveal" style="transition-delay:.5s">
+        <div class="pc-icon"><i class="fa-solid fa-file-contract"></i></div>
+        <h3>Contract Law</h3>
+        <p>Drafting, review, and negotiation of commercial contracts that protect your interests and stand firm under legal scrutiny.</p>
+        <span class="pc-arrow"><i class="fa-solid fa-arrow-right"></i> &nbsp;Learn More</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── WHY CHOOSE US ───────── -->
+<section id="why">
+  <div class="container">
+    <div class="why-header reveal">
+      <div class="section-label" style="justify-content:center;">Our Approach</div>
+      <h2>Why Choose <em>Mugo Law</em></h2>
+      <p>Our clients return — and refer. Here is what sets us apart in Nairobi's competitive legal landscape.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon"><i class="fa-solid fa-brain"></i></div>
+        <h3>Strategic Legal Thinking</h3>
+        <p>We analyse beyond the surface, anticipating legal challenges and crafting strategies that protect your interests long-term.</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.1s">
+        <div class="why-icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+        <h3>Client-Centered Service</h3>
+        <p>Every client receives direct partner access, transparent communication, and legal counsel tailored to their specific goals.</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.2s">
+        <div class="why-icon"><i class="fa-solid fa-trophy"></i></div>
+        <h3>Proven Track Record</h3>
+        <p>Decades of successful outcomes across Kenya's courts, boardrooms, and negotiation tables speak louder than credentials.</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.3s">
+        <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>Discretion &amp; Integrity</h3>
+        <p>Your matters are handled with the utmost confidentiality and ethical rigour — the cornerstone of everything we do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── INSIGHT ───────── -->
+<section id="insight">
+  <div class="container">
+    <div class="insight-inner">
+      <div class="insight-text reveal-left">
+        <div class="section-label">Legal Intelligence</div>
+        <h2>Insight That<br><em>Moves You</em><br>Forward</h2>
+        <p>At Mugo Law, we believe informed clients make better decisions. Our attorneys don't just react to legal issues — we anticipate them, providing proactive counsel that positions you ahead of risk.</p>
+        <blockquote>
+          "The best legal counsel is invisible — it prevents the problem before it begins."
+        </blockquote>
+        <p>Whether navigating corporate restructuring, complex property transactions, or high-stakes litigation, our approach blends deep legal knowledge with sharp commercial acumen.</p>
+        <a href="#contact" class="btn-primary" style="margin-top:12px;">
+          <i class="fa-solid fa-arrow-right"></i>
+          Speak to an Advocate
+        </a>
+      </div>
+      <div class="insight-img reveal-right">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80&auto=format&fit=crop" alt="Legal Strategy Meeting" loading="lazy" />
+        <div class="insight-img-cap">
+          <i class="fa-solid fa-star"></i>
+          <span>Nairobi's Trusted Legal Advisors Since 2004</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── TESTIMONIALS ───────── -->
+<section id="testimonials">
+  <div class="container">
+    <div class="test-header reveal">
+      <div class="section-label" style="justify-content:center;">Client Voices</div>
+      <h2>What Our Clients <em>Say</em></h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <span class="test-quote-icon">&ldquo;</span>
+        <p>Mugo Law handled our company acquisition with exceptional precision. Their commercial law team identified issues our previous advisors had missed entirely. I would engage them without hesitation.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&auto=format&fit=crop&crop=faces" alt="Client" loading="lazy" />
+          </div>
+          <div>
+            <div class="test-name">James Kariuki</div>
+            <div class="test-role">CEO, Kariuki Holdings Ltd</div>
+            <div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:.1s">
+        <span class="test-quote-icon">&ldquo;</span>
+        <p>Our family land dispute had been unresolved for years. The Mugo Law real estate team resolved it within months. Thorough, professional, and always reachable. Truly outstanding service.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&q=80&auto=format&fit=crop&crop=faces" alt="Client" loading="lazy" />
+          </div>
+          <div>
+            <div class="test-name">Wanjiru Mwangi</div>
+            <div class="test-role">Property Developer, Nairobi</div>
+            <div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:.2s">
+        <span class="test-quote-icon">&ldquo;</span>
+        <p>Navigating a complex international commercial contract required advisors who understood both Kenyan law and global business norms. Mugo Law delivered on every level — strategic, thorough, and decisive.</p>
+        <div class="test-author">
+          <div class="test-avatar">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&q=80&auto=format&fit=crop&crop=faces" alt="Client" loading="lazy" />
+          </div>
+          <div>
+            <div class="test-name">David Ochieng</div>
+            <div class="test-role">Director, East Africa Trade Partners</div>
+            <div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── CTA BLOCK ───────── -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="section-label" style="justify-content:center;">Take the Next Step</div>
+      <h2>Need Legal Representation<br><em>You Can Trust?</em></h2>
+      <div class="cta-divider"></div>
+      <p>Our senior advocates are ready to assess your matter. Schedule a confidential consultation and experience the Mugo Law difference.</p>
+      <a href="#contact" class="btn-primary">
+        <i class="fa-regular fa-calendar-check"></i>
+        Schedule a Consultation
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── CONTACT ───────── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal-left">
+        <div class="section-label">Get In Touch</div>
+        <h2>Let Us<br>Hear Your<br><em>Matter</em></h2>
+        <p>Reach out for a discreet, obligation-free consultation. Our team is available Monday to Friday, 8:00 AM — 6:00 PM EAT.</p>
+        <div class="contact-detail">
+          <div class="cd-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="cd-text">
+            <div class="cd-label">Office Location</div>
+            <div class="cd-val">Upper Hill, Nairobi, Kenya</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon"><i class="fa-solid fa-phone"></i></div>
+          <div class="cd-text">
+            <div class="cd-label">Phone</div>
+            <div class="cd-val">+254 700 000 000</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="cd-text">
+            <div class="cd-label">Email</div>
+            <div class="cd-val">info@mugolaw.co.ke</div>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8188975!2d36.81!3d-1.29!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d664b5a83b%3A0x4eee19e4dfcfb1f!2sUpper%20Hill%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1700000000000"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Mugo Law Office Location"></iframe>
+        </div>
+      </div>
+      <div class="contact-form reveal-right">
+        <div class="form-title">Send Us a Message</div>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" placeholder="Your first name" required />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" placeholder="Your last name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="+254 700 000 000" />
+          </div>
+          <div class="form-group">
+            <label for="service">Area of Interest</label>
+            <select id="service">
+              <option value="">Select a practice area</option>
+              <option>Corporate Law</option>
+              <option>Real Estate Law</option>
+              <option>Family Law</option>
+              <option>Litigation</option>
+              <option>Commercial Law</option>
+              <option>Contract Law</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" placeholder="Briefly describe your legal matter..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">
+            <i class="fa-solid fa-paper-plane"></i>
+            Send Message
+          </button>
+          <div class="form-success" id="formSuccess">
+            <i class="fa-solid fa-circle-check" style="font-size:24px;display:block;margin-bottom:10px;"></i>
+            Thank you. We will be in touch within 24 hours.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── FOOTER ───────── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="firm-name">Mugo Law</div>
+        <span class="firm-sub">Advocates &amp; Legal Consultants</span>
+        <p>Premier legal counsel for individuals and enterprises across Kenya. Precision. Integrity. Results.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Practice Areas</h4>
+        <ul>
+          <li><a href="#practice">Corporate Law</a></li>
+          <li><a href="#practice">Real Estate Law</a></li>
+          <li><a href="#practice">Family Law</a></li>
+          <li><a href="#practice">Litigation</a></li>
+          <li><a href="#practice">Commercial Law</a></li>
+          <li><a href="#practice">Contract Law</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About the Firm</a></li>
+          <li><a href="#why">Our Approach</a></li>
+          <li><a href="#testimonials">Client Testimonials</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Office Hours</h4>
+        <p>Monday – Friday<br>8:00 AM – 6:00 PM EAT</p>
+        <p style="margin-top:14px;">Saturday<br>9:00 AM – 1:00 PM EAT</p>
+        <p style="margin-top:14px;color:rgba(255,255,255,0.3);">Sunday — Closed</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Mugo Law. All rights reserved.</p>
+      <p>Designed by <a href="https://madshaqdigitalpr.com" target="_blank">Madshaq Digital PR Agency</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ───────── JS ───────── -->
+<script>
+  // Sticky nav
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => revealObs.observe(el));
+
+  // Animated counters
+  function animateCounter(el, target, suffix = '') {
+    let start = 0;
+    const duration = 2000;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const val = Math.floor(progress * target);
+      el.textContent = val.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString() + suffix;
+    };
+    requestAnimationFrame(step);
+  }
+  const countersData = [
+    { selector: '.trust-item:nth-child(1) .num', target: 20, suffix: '+' },
+    { selector: '.trust-item:nth-child(2) .num', target: 1200, suffix: '+' },
+    { selector: '.trust-item:nth-child(3) .num', target: 98, suffix: '%' },
+    { selector: '.trust-item:nth-child(4) .num', target: 6, suffix: '' },
+  ];
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = [...entry.target.parentElement.children].indexOf(entry.target);
+        const d = countersData[idx];
+        if (d) {
+          const numEl = entry.target.querySelector('.num');
+          if (numEl) animateCounter(numEl, d.target, d.suffix);
+        }
+        counterObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.trust-item').forEach(el => counterObs.observe(el));
+
+  // Form
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }, 1400);
+  });
+</script>
+</body>
+</html>
